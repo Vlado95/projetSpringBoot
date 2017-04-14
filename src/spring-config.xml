@@ -19,15 +19,15 @@
 	</bean>
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" scope="singleton">
-<!-- 		<property name="dataSource" ref="biblioDS" /> -->
-<!-- 		<property name="mappingResources"> -->
-<!-- 			<list> -->
-<!-- 				<value>fitec/dba/metier/User.hbm.xml</value> -->
-<!-- 				<value>fitec/dba/metier/Auteur.hbm.xml</value> -->
-<!-- 				<value>fitec/dba/metier/Editeur.hbm.xml</value> -->
-<!-- 				<value>fitec/dba/metier/Livre.hbm.xml</value> -->
-<!-- 			</list> -->
-<!-- 		</property> -->
+		<property name="dataSource" ref="biblioDS" />
+		<property name="mappingResources">
+			<list>
+				<value>fitec/dba/metier/User.hbm.xml</value>
+				<value>fitec/dba/metier/Auteur.hbm.xml</value>
+				<value>fitec/dba/metier/Editeur.hbm.xml</value>
+				<value>fitec/dba/metier/Livre.hbm.xml</value>
+			</list>
+		</property>
 		<property name="hibernateProperties">
 			<value>
 				hibernate.dialect=org.hibernate.dialect.HSQLDialect
@@ -41,15 +41,14 @@
 	<!-- init-method="getSessionFactory" -->
 	<!-- -->
 
-	<bean id="HbnFactory" class="fitec.dba.factory.HbnFactory" init-method="getSessionFactory" >
+	<bean id="HbnFactory" class="fitec.dba.factory.HbnFactory">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-<!-- 	<bean id="HbnDaoAuteur" class="fitec.dba.hbn.HbnDaoAuteur" init-method="getSession"> -->
-<!-- 		<property name="sessionFactory" ref="sessionFactory" /> -->
-<!-- 	</bean> -->
+	<bean id="HbnDaoAuteur" class="fitec.dba.hbn.HbnDaoAuteur">
+	</bean>
 
-	<bean id="HbnDaoUser" class="fitec.dba.hbn.HbnDaoUser" init-method="getSession">
+	<bean id="HbnDaoUser" class="fitec.dba.hbn.HbnDaoUser">
 	</bean>
 
 	<!-- Exemple d'injection par constructeur et enseuite par setter <bean id="otherBean" 

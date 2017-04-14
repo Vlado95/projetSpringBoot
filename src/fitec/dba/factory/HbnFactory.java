@@ -8,7 +8,7 @@ import fitec.dba.metier.User;
 
 public class HbnFactory {
 
-	    private static SessionFactory sessionFactory ; //= buildSessionFactory();
+	    private static SessionFactory sessionFactory ;
 
 		private static Session session ;
 
@@ -38,9 +38,7 @@ public class HbnFactory {
 			HbnFactory.sessionFactory = sessionFactory;
 		}
 
-		public static SessionFactory getSessionFactory() {
-	    	if ( sessionFactory != null)
-	    		sessionFactory = buildSessionFactory();    	
+		public static SessionFactory getSessionFactory() {   	
 	        return sessionFactory;
 	    }
 
