@@ -18,18 +18,16 @@
 		<property name="password" value="java1" />
 	</bean>
 
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
-		scope="singleton">
-		<property name="dataSource" ref="biblioDS" />
-		<property name="mappingResources">
-			<list>
-				<value>fitec/dba/metier/User.hbm.xml</value>
-				<value>fitec/dba/metier/Auteur.hbm.xml</value>
-				<value>fitec/dba/metier/Editeur.hbm.xml</value>
-				<value>fitec/dba/metier/Livre.hbm.xml</value>
-			</list>
-		</property>
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" scope="singleton">
+<!-- 		<property name="dataSource" ref="biblioDS" /> -->
+<!-- 		<property name="mappingResources"> -->
+<!-- 			<list> -->
+<!-- 				<value>fitec/dba/metier/User.hbm.xml</value> -->
+<!-- 				<value>fitec/dba/metier/Auteur.hbm.xml</value> -->
+<!-- 				<value>fitec/dba/metier/Editeur.hbm.xml</value> -->
+<!-- 				<value>fitec/dba/metier/Livre.hbm.xml</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
 		<property name="hibernateProperties">
 			<value>
 				hibernate.dialect=org.hibernate.dialect.HSQLDialect
