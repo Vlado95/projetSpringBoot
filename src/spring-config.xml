@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean id="biblioDS" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" scope="singleton">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/fitec" />
+		<property name="username" value="java1" />
+		<property name="password" value="java1" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		scope="singleton">
+		<property name="dataSource" ref="biblioDS" />
+		<property name="mappingResources">
+			<list>
+				<value>fitec/dba/metier/User.hbm.xml</value>
+				<value>fitec/dba/metier/Auteur.hbm.xml</value>
+				<value>fitec/dba/metier/Editeur.hbm.xml</value>
+				<value>fitec/dba/metier/Livre.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.HSQLDialect
+			</value>
+		</property>
+	</bean>
+
+	<!-- -->
+	<!-- On peut utiliser Spring Sans Connexion JDBC en laissant Hibernate le 
+		contrôle -->
+	<!-- init-method="getSessionFactory" -->
+	<!-- -->
+
+	<bean id="HbnFactory" class="fitec.dba.factory.HbnFactory" init-method="getSessionFactory" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+<!-- 	<bean id="HbnDaoAuteur" class="fitec.dba.hbn.HbnDaoAuteur" init-method="getSession"> -->
+<!-- 		<property name="sessionFactory" ref="sessionFactory" /> -->
+<!-- 	</bean> -->
+
+	<bean id="HbnDaoUser" class="fitec.dba.hbn.HbnDaoUser" init-method="getSession">
+	</bean>
+
+	<!-- Exemple d'injection par constructeur et enseuite par setter <bean id="otherBean" 
+		class="com.my.class.OtherBean" /> <bean id="myBean" class="com.my.class.myBean" 
+		> <constructor-arg ref="otherBean" /> </bean> <bean id="myBeans" class="com.my.class.myBean" 
+		> <property name="other" ref="otherBean" /> </bean> -->
+
+</beans>
