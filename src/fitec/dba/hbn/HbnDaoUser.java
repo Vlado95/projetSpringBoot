@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import fitec.dba.dao.IDao;
 import fitec.dba.factory.HbnFactory;
@@ -13,13 +14,37 @@ public class HbnDaoUser implements IDao<User> {
 
 	private Session session ;
 	
+	private static SessionFactory sessionFactory;
+	
+	
+	
 	public Session getSession() {
 		if ( session == null ){
-			session = HbnFactory.getSession();
+			session = sessionFactory.openSession();
 		}
 		return session;
 	}
 	
+	
+	
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+
+
+	public static void setSessionFactory(SessionFactory sessionFactory) {
+		HbnDaoUser.sessionFactory = sessionFactory;
+	}
+
+
+
+	public void setSession(Session session) {
+		this.session = session;
+	}
+
+
+
 	@Override
 	public List<User> selectAll() {
 		Session session = getSession();

@@ -4,6 +4,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import fitec.dba.dao.IDao;
+import fitec.dba.hbn.HbnDaoAuteur;
+import fitec.dba.hbn.HbnDaoEditeur;
+import fitec.dba.hbn.HbnDaoLivre;
+import fitec.dba.hbn.HbnDaoUser;
 import fitec.dba.metier.User;
 
 public class HbnFactory {
@@ -62,4 +67,85 @@ public class HbnFactory {
 	    	
 	    	return user;
 	    }
+	    
+	    
+	    
+	    
+	    public enum DaoMetier  {Livre, Auteur, Editeur, User};
+	    
+	    
+	    
+	    private static HbnDaoUser hbnDaoUser;
+	    
+	    private static HbnDaoLivre hbnDaoLivre;
+	    
+	    private static HbnDaoEditeur hbnDaoEditeur;
+	    
+	    private static HbnDaoAuteur hbnDaoAuteur;
+	    
+	    
+
+		public static HbnDaoUser getHbnDaoUser() {
+			return hbnDaoUser;
+		}
+
+		public static void setHbnDaoUser(HbnDaoUser hbnDaoUser) {
+			HbnFactory.hbnDaoUser = hbnDaoUser;
+		}
+
+		
+		
+		
+		public static HbnDaoLivre getHbnDaoLivre() {
+			return hbnDaoLivre;
+		}
+
+		public static void setHbnDaoLivre(HbnDaoLivre hbnDaoLivre) {
+			HbnFactory.hbnDaoLivre = hbnDaoLivre;
+		}
+
+		public static HbnDaoEditeur getHbnDaoEditeur() {
+			return hbnDaoEditeur;
+		}
+
+		public static void setHbnDaoEditeur(HbnDaoEditeur hbnDaoEditeur) {
+			HbnFactory.hbnDaoEditeur = hbnDaoEditeur;
+		}
+
+		public static HbnDaoAuteur getHbnDaoAuteur() {
+			return hbnDaoAuteur;
+		}
+
+		public static void setHbnDaoAuteur(HbnDaoAuteur hbnDaoAuteur) {
+			HbnFactory.hbnDaoAuteur = hbnDaoAuteur;
+		}
+
+		public static IDao<?> getDAO(DaoMetier deoMetier) {
+
+			//enum dao = DaoMetier;
+			IDao<?> dao = null;
+			
+			//deoMetier.L
+			
+			switch(deoMetier)
+	    	{
+		    	case User:
+		    		dao = hbnDaoUser;
+		    		break;
+		    		
+		    	case Editeur:
+		    		dao = hbnDaoEditeur;
+		    		break;
+		    	
+		    	case Auteur:
+		    		dao = hbnDaoAuteur;
+		    		break;
+		    		
+		    	case Livre:
+		    		dao = hbnDaoLivre;
+		    		break;
+	    		
+	    	}
+			return dao;
+		}
 	}

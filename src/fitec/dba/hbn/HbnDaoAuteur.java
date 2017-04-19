@@ -30,21 +30,46 @@ public class HbnDaoAuteur implements IDao<Auteur> {
 
 	private Session session ;
 	
+	private static SessionFactory sessionFactory;
+	
+//	public Session getSession() {
+//		if ( session == null ){
+//			session = HbnFactory.getSession();
+//		}
+//		return session;
+//	}
+
+	
+	
+	
+	public HbnDaoAuteur() {
+		//session = getSession();
+	}
+
 	public Session getSession() {
-		if ( session == null ){
-			session = HbnFactory.getSession();
+		if (session == null) {
+			session = sessionFactory.openSession();
 		}
 		return session;
 	}
 
-	public HbnDaoAuteur() {
-		session = getSession();
+	public void setSession(Session session) {
+		this.session = session;
+	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		HbnDaoAuteur.sessionFactory = sessionFactory;
 	}
 
 	public List<Auteur> selectAll() {
 		/**
 		 * Utilisation des interfaces Criteria et Builder
 		 */
+		session = getSession();
 		CriteriaBuilder cb = session.getCriteriaBuilder();
 		CriteriaQuery<Auteur> criteria = (CriteriaQuery) cb.createQuery(Auteur.class);
 		criteria.from(Auteur.class);

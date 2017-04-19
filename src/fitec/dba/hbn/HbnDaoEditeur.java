@@ -26,17 +26,40 @@ import fitec.dba.metier.User;
 
 public class HbnDaoEditeur implements IDao<Editeur> {
 	
+	private static SessionFactory sessionFactory;
+	
 	private Session session ;
+	
 	
 	public Session getSession() {
 		if ( session == null ){
-			session = HbnFactory.getSession();
+			session = sessionFactory.openSession();
 		}
 		return session;
 	}
+	
+	
+
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+
+
+	public static void setSessionFactory(SessionFactory sessionFactory) {
+		HbnDaoEditeur.sessionFactory = sessionFactory;
+	}
+
+
+
+	public void setSession(Session session) {
+		this.session = session;
+	}
+
+
 
 	public HbnDaoEditeur() {
-		session = getSession();
+		//session = getSession();
 	}
 
 	public List<Editeur> selectAll() {

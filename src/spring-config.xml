@@ -18,7 +18,9 @@
 		<property name="password" value="java1" />
 	</bean>
 
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" scope="singleton">
+	<bean id="sessionFactoryID"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		scope="singleton">
 		<property name="dataSource" ref="biblioDS" />
 		<property name="mappingResources">
 			<list>
@@ -42,15 +44,24 @@
 	<!-- -->
 
 	<bean id="HbnFactory" class="fitec.dba.factory.HbnFactory">
-		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="sessionFactory" ref="sessionFactoryID" />
+		<property name="HbnDaoUser" ref="HbnDaoUser" />
+		<property name="HbnDaoAuteur" ref="HbnDaoAuteur" />
 	</bean>
 
 	<bean id="HbnDaoAuteur" class="fitec.dba.hbn.HbnDaoAuteur">
+		<property name="sessionFactory" ref="sessionFactoryID"></property>
 	</bean>
 
 	<bean id="HbnDaoUser" class="fitec.dba.hbn.HbnDaoUser">
+		<property name="sessionFactory" ref="sessionFactoryID"></property>
 	</bean>
 
+
+	<bean id="HbnDaoEditeur" class="fitec.dba.hbn.HbnDaoEditeur">
+<!-- 		<property name="sessionFactory" ref="sessionFactoryID"></property> -->
+	</bean>
+	
 	<!-- Exemple d'injection par constructeur et enseuite par setter <bean id="otherBean" 
 		class="com.my.class.OtherBean" /> <bean id="myBean" class="com.my.class.myBean" 
 		> <constructor-arg ref="otherBean" /> </bean> <bean id="myBeans" class="com.my.class.myBean" 
