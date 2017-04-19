@@ -45,20 +45,20 @@
 
 	<bean id="HbnFactory" class="fitec.dba.factory.HbnFactory">
 		<property name="sessionFactory" ref="sessionFactoryID" />
-		<property name="HbnDaoUser" ref="HbnDaoUser" />
-		<property name="HbnDaoAuteur" ref="HbnDaoAuteur" />
+		<property name="DaoUser" ref="DaoUser" />
+		<property name="DaoAuteur" ref="DaoAuteur" />
 	</bean>
 
-	<bean id="HbnDaoAuteur" class="fitec.dba.hbn.HbnDaoAuteur">
+	<bean id="DaoAuteur" class="fitec.dba.hbn.HbnDaoAuteur">
 		<property name="sessionFactory" ref="sessionFactoryID"></property>
 	</bean>
 
-	<bean id="HbnDaoUser" class="fitec.dba.hbn.HbnDaoUser">
+	<bean id="DaoUser" class="fitec.dba.hbn.HbnDaoUser">
 		<property name="sessionFactory" ref="sessionFactoryID"></property>
 	</bean>
 
 
-	<bean id="HbnDaoEditeur" class="fitec.dba.hbn.HbnDaoEditeur">
+	<bean id="DaoEditeur" class="fitec.dba.hbn.HbnDaoEditeur">
 <!-- 		<property name="sessionFactory" ref="sessionFactoryID"></property> -->
 	</bean>
 	

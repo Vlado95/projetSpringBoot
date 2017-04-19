@@ -5,10 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import fitec.dba.dao.IDao;
-import fitec.dba.hbn.HbnDaoAuteur;
-import fitec.dba.hbn.HbnDaoEditeur;
-import fitec.dba.hbn.HbnDaoLivre;
-import fitec.dba.hbn.HbnDaoUser;
+import fitec.dba.metier.Auteur;
+import fitec.dba.metier.Editeur;
+import fitec.dba.metier.Livre;
 import fitec.dba.metier.User;
 
 public class HbnFactory {
@@ -75,54 +74,55 @@ public class HbnFactory {
 	    
 	    
 	    
-	    private static HbnDaoUser hbnDaoUser;
+	    //private static HbnDaoUser hbnDaoUser;
+	    private static IDao<User> daoUser;
 	    
-	    private static HbnDaoLivre hbnDaoLivre;
+	    private static IDao<Livre> daoLivre;
 	    
-	    private static HbnDaoEditeur hbnDaoEditeur;
+	    private static IDao<Editeur> daoEditeur;
 	    
-	    private static HbnDaoAuteur hbnDaoAuteur;
+	    private static IDao<Auteur> daoAuteur;
 	    
-	    
+		
+	
 
-		public static HbnDaoUser getHbnDaoUser() {
-			return hbnDaoUser;
+		public static IDao<User> getDaoUser() {
+			return daoUser;
 		}
 
-		public static void setHbnDaoUser(HbnDaoUser hbnDaoUser) {
-			HbnFactory.hbnDaoUser = hbnDaoUser;
+		public static void setDaoUser(IDao<User> daoUser) {
+			HbnFactory.daoUser = daoUser;
 		}
 
+		public static IDao<Livre> getDaoLivre() {
+			return daoLivre;
+		}
+
+		public static void setDaoLivre(IDao<Livre> daoLivre) {
+			HbnFactory.daoLivre = daoLivre;
+		}
+
+		public static IDao<Editeur> getDaoEditeur() {
+			return daoEditeur;
+		}
+
+		public static void setDaoEditeur(IDao<Editeur> daoEditeur) {
+			HbnFactory.daoEditeur = daoEditeur;
+		}
+
+		public static IDao<Auteur> getDaoAuteur() {
+			return daoAuteur;
+		}
+
+		public static void setDaoAuteur(IDao<Auteur> daoAuteur) {
+			HbnFactory.daoAuteur = daoAuteur;
+		}
 		
 		
 		
-		public static HbnDaoLivre getHbnDaoLivre() {
-			return hbnDaoLivre;
-		}
-
-		public static void setHbnDaoLivre(HbnDaoLivre hbnDaoLivre) {
-			HbnFactory.hbnDaoLivre = hbnDaoLivre;
-		}
-
-		public static HbnDaoEditeur getHbnDaoEditeur() {
-			return hbnDaoEditeur;
-		}
-
-		public static void setHbnDaoEditeur(HbnDaoEditeur hbnDaoEditeur) {
-			HbnFactory.hbnDaoEditeur = hbnDaoEditeur;
-		}
-
-		public static HbnDaoAuteur getHbnDaoAuteur() {
-			return hbnDaoAuteur;
-		}
-
-		public static void setHbnDaoAuteur(HbnDaoAuteur hbnDaoAuteur) {
-			HbnFactory.hbnDaoAuteur = hbnDaoAuteur;
-		}
 
 		public static IDao<?> getDAO(DaoMetier deoMetier) {
 
-			//enum dao = DaoMetier;
 			IDao<?> dao = null;
 			
 			//deoMetier.L
@@ -130,19 +130,19 @@ public class HbnFactory {
 			switch(deoMetier)
 	    	{
 		    	case User:
-		    		dao = hbnDaoUser;
+		    		dao = daoUser;
 		    		break;
 		    		
 		    	case Editeur:
-		    		dao = hbnDaoEditeur;
+		    		dao = daoEditeur;
 		    		break;
 		    	
 		    	case Auteur:
-		    		dao = hbnDaoAuteur;
+		    		dao = daoAuteur;
 		    		break;
 		    		
 		    	case Livre:
-		    		dao = hbnDaoLivre;
+		    		dao = daoLivre;
 		    		break;
 	    		
 	    	}
